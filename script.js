@@ -1,15 +1,15 @@
 let city = prompt("enter your City,", "Salt Lake City")
 let units = "imperial"
-let apiID = "fillapikeyhere"
+let apiID = "apiKeyHere"
 let TempDataStore = null
 
 
 
-getCityWeather(city, units)
-fiveDayForcast(city,units)
+getCityWeather(city, units,apiID)
+fiveDayForcast(city,units,apiID)
 
 
-function getCityWeather(city, units) {
+function getCityWeather(city, units,apiID) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiID}&units=${units}`)
         .then(response => {
 
@@ -42,18 +42,10 @@ function jsonHandler(data) {
 
 }
 
-function fiveDayForcast(city, units) {
-    fetch(`api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiID}&units=${units}`)
-        .then(response => {
-            if (response.ok) {
-                return (response.json())
-            } else {
-                throw new error("The call was not complated succesfully")
-            }
-        })
-        .then(data =>{
-            console.log(data)
+function fiveDayForcast(city,units,apiID) {
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiID}&units=${units}`)
+  .then(response => response.json())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
 
-        })
-        .catch(error => console.log("error", error))
 }
