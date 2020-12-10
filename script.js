@@ -7,6 +7,20 @@ let TempDataStore = null
 
 getCityWeather(city, units, apiID)
 fiveDayForcast(city, units, apiID)
+searchButton()
+
+function searchButton() {
+    let sButton = document.querySelector("#search-btn")
+    sButton.addEventListener("click", function(event) {
+        event.preventDefault()
+        console.log("search button pressed")
+        let searchColumn = document.querySelector(".search-column")
+        let searchedCityButton = document.createElement("button")
+        searchedCityButton.setAttribute("class",'btn btn-primary')
+        searchedCityButton.innerText = document.getElementById("search-box").value
+        searchColumn.appendChild(searchedCityButton)
+    })
+}
 
 
 function getCityWeather(city, units, apiID) {
