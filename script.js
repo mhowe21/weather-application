@@ -1,6 +1,6 @@
-let city = prompt("enter your City,", "Salt Lake City")
+let city = "Salt Lake City"
 let units = "imperial"
-let apiID = "apikeyhere"
+let apiID = ""
 let TempDataStore = null
 
 
@@ -34,9 +34,9 @@ function jsonHandler(data) {
     TempDataStore = data
     let city = data.name
     let temp = data.main.temp
-    let container = document.getElementById("container")
+    let currentWeather = document.getElementById("current-weather")
     let element = document.createElement("p")
-    container.appendChild(element)
+    currentWeather.appendChild(element)
     element.innerHTML = (`City: ${city},${data.sys.country} <br> Tempreture: ${temp} F <br> WindSpeed: ${data.wind.speed} MPH`)
 
 
@@ -64,17 +64,17 @@ function fiveDayForcast(city, units, apiID) {
 function fiveDayJson(data) {
     TempDataStore = data
 
-    let fiveDay = document.getElementById("#5day")
+    let fiveDay = document.querySelector("#forcast")
 
-    let dayDiv = document.createElement("div")
-    fiveDay.appendChild(dayDiv)
+    //let dayDiv = document.createElement("div")
 
     for (let i = 0; i < data.list.length; i = i + 8) {
         //console.log(TempDataStore.list[i].dt_txt)
 
         let p = document.createElement("p")
-        dayDiv.appendChild(p)
-        p.innerHTML = (TempDataStore.list[i].dt_txt)
+        fiveDay.appendChild(p)
+        p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
+        
     }
 
 }

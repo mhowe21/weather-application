@@ -11,11 +11,31 @@
 </head>
 
 <body>
-    <div id="container">
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <span class="navbar-brand mb-0 h1">Navbar</span>
+            </div>
+          </nav>
+          
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+            </div>
+            <div class="col-9">
+                <div id="current-weather">
 
-    </div>
-    <div id="5day">
-
+                </div>
+                <div id="forcast">
+                    <h2>5-Day Forcast:</h2>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>
