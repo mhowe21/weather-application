@@ -5,20 +5,21 @@ let TempDataStore = null
 
 
 
-getCityWeather(city, units, apiID)
-fiveDayForcast(city, units, apiID)
+
 searchButton()
 
-function searchButton() {
+function searchButton() {   
+
     let sButton = document.querySelector("#search-btn")
     sButton.addEventListener("click", function (event) {
         event.preventDefault()
         console.log("search button pressed")
-        let searchColumn = document.querySelector(".search-column")
-        let searchedCityButton = document.createElement("button")
-        searchedCityButton.setAttribute("class", 'btn btn-primary')
-        searchedCityButton.innerText = document.getElementById("search-box").value
-        searchColumn.appendChild(searchedCityButton)
+
+        city = document.querySelector("#search-box").value
+        getCityWeather(city, units, apiID)
+        fiveDayForcast(city, units, apiID)
+        //let searchColumn = document.querySelector(".search-column")
+        
     })
 }
 
@@ -44,14 +45,30 @@ function getCityWeather(city, units, apiID) {
 }
 
 function jsonHandler(data) {
-    //console.log(data)
+    console.log(data)
     TempDataStore = data
     let city = data.name
     let temp = data.main.temp
     let currentWeather = document.getElementById("current-weather")
-    let element = document.createElement("p")
-    currentWeather.appendChild(element)
-    element.innerHTML = (`City: ${city},${data.sys.country} <br> Tempreture: ${temp} F <br> WindSpeed: ${data.wind.speed} MPH`)
+    // clear old results from Dom
+    while(currentWeather.firstChild) {
+        currentWeather.removeChild(currentWeather.lastChild)
+    }
+
+    let currentCard = document.createElement("div")
+    currentCard.setAttribute("class", "card")
+    currentWeather.appendChild(currentCard)
+    
+    let currentCardBody = document.createElement("div")
+    currentCardBody.setAttribute("class", "card-body")
+    currentCardBody.innerHTML = (`<h5>${city} Weather</h5><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed}</p>`)
+    currentCard.appendChild(currentCardBody)
+
+    
+    
+    // let element = document.createElement("div")
+    // currentWeather.appendChild(element)
+    // element.innerHTML = (`City: ${city},${data.sys.country} <br> Tempreture: ${temp} F <br> WindSpeed: ${data.wind.speed} MPH`)
 
 
 }
@@ -80,6 +97,11 @@ function fiveDayJson(data) {
 
     let fiveDay = document.querySelector("#forcast")
 
+    // clear old results from Dom
+    while(fiveDay.firstChild) {
+        fiveDay.removeChild(fiveDay.lastChild)
+    }
+
     //let dayDiv = document.createElement("div")
 
     for (let i = 0; i < data.list.length; i = i + 8) {
@@ -89,7 +111,7 @@ function fiveDayJson(data) {
         // fiveDay.appendChild(p)
         // p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
         let column = document.createElement("div")
-        column.setAttribute("class","col-2 forcast-item-holder")
+        column.setAttribute("class", "col-2 forcast-item-holder")
         fiveDay.append(column)
 
         let card = document.createElement("div")
