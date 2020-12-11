@@ -1,6 +1,6 @@
 let city = "Salt Lake City"
 let units = "imperial"
-let apiID = ""
+let apiID = "008c89668171b3ba97713ee1c5229978"
 let TempDataStore = null
 
 
@@ -11,12 +11,12 @@ searchButton()
 
 function searchButton() {
     let sButton = document.querySelector("#search-btn")
-    sButton.addEventListener("click", function(event) {
+    sButton.addEventListener("click", function (event) {
         event.preventDefault()
         console.log("search button pressed")
         let searchColumn = document.querySelector(".search-column")
         let searchedCityButton = document.createElement("button")
-        searchedCityButton.setAttribute("class",'btn btn-primary')
+        searchedCityButton.setAttribute("class", 'btn btn-primary')
         searchedCityButton.innerText = document.getElementById("search-box").value
         searchColumn.appendChild(searchedCityButton)
     })
@@ -85,10 +85,24 @@ function fiveDayJson(data) {
     for (let i = 0; i < data.list.length; i = i + 8) {
         //console.log(TempDataStore.list[i].dt_txt)
 
-        let p = document.createElement("p")
-        fiveDay.appendChild(p)
-        p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
-        
+        // let p = document.createElement("p")
+        // fiveDay.appendChild(p)
+        // p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
+        let column = document.createElement("div")
+        column.setAttribute("class","col-2 forcast-item-holder")
+        fiveDay.append(column)
+
+        let card = document.createElement("div")
+        card.setAttribute("class", "card five-day-card")
+        column.appendChild(card)
+
+
+        let cardBody = document.createElement("div")
+        cardBody.setAttribute("class", "card-body")
+        cardBody.innerHTML = (`<h5 class="card-title">${data.list[i].dt_txt}</h5> <p>Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%</p>`)
+        card.appendChild(cardBody)
+
+
     }
 
 }
