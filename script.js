@@ -7,8 +7,16 @@ window.onload = function () {
     //console.log(Object(localStorage))
     searchButton()
     searchHistory()
-    getCityWeather(city, units, apiID)
-    fiveDayForcast(city, units, apiID)
+
+    // search local storage to return the last result on page refresh otherwise use default value. 
+    if (localStorage.length > 0) {
+        getCityWeather(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
+        fiveDayForcast(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
+    }else{
+        getCityWeather(city,units,apiID)
+        fiveDayForcast(city,units,apiID)
+    }
+
 
 }
 
