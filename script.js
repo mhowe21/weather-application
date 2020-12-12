@@ -9,20 +9,24 @@ window.onload = function () {
 }
 
 
-function searchHistory() {
-    
-    
+function searchHistory(city) {
+
+    let keys = Object.keys(localStorage)
 
     let searchedCities = document.querySelector(".searched-cities")
-    
-   
+    for (const elm of keys) {
+        console.log(elm)
         
-            let p = document.createElement("p")
-            searchedCities.appendChild(p)
+        let p = document.createElement("p")
+        searchedCities.appendChild(p)
 
-            let searchedButton = document.createElement("button")
-            searchedButton.setAttribute("class", "btn btn-primary")
-            searchedButton.innerText(elm)
+        let searchedButton = document.createElement("button")
+        searchedButton.setAttribute("class", "btn btn-primary")
+        searchedButton.innerText = elm
+        p.appendChild(searchedButton)
+
+    }
+
 
 
 }
@@ -39,7 +43,8 @@ function searchButton() {
         fiveDayForcast(city, units, apiID)
 
         // add weather to local storage
-        
+        localStorage.setItem(city, city)
+
 
     })
 }
@@ -67,7 +72,7 @@ function getCityWeather(city, units, apiID) {
 
 function jsonHandler(data) {
     console.log(data)
-    
+
     let city = data.name
     let temp = data.main.temp
     let currentWeather = document.getElementById("current-weather")
