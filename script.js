@@ -87,6 +87,7 @@ function jsonHandler(data) {
 
     let city = data.name
     let temp = data.main.temp
+    let icon = data.weather[0].icon
     let currentWeather = document.getElementById("current-weather")
     // clear old results from Dom
     while (currentWeather.firstChild) {
@@ -94,12 +95,12 @@ function jsonHandler(data) {
     }
 
     let currentCard = document.createElement("div")
-    currentCard.setAttribute("class", "card")
+    currentCard.setAttribute("class", "card weather-card")
     currentWeather.appendChild(currentCard)
 
     let currentCardBody = document.createElement("div")
     currentCardBody.setAttribute("class", "card-body")
-    currentCardBody.innerHTML = (`<h5>${city} Weather</h5><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed}</p>`)
+    currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH</p>`)
     currentCard.appendChild(currentCardBody)
 
     // let element = document.createElement("div")
