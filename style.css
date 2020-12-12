@@ -12,3 +12,7 @@ header{
 .searched-cities {
     margin-top: 5%;
 }
+
+.searched-cities button {
+    width: 100%;
+}
