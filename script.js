@@ -9,14 +9,20 @@ window.onload = function () {
 }
 
 
-function searchHistory(city) {
+function searchHistory() {
 
     let keys = Object.keys(localStorage)
 
     let searchedCities = document.querySelector(".searched-cities")
+
+    // clear items prior to draw
+    while(searchedCities.firstChild){
+        searchedCities.removeChild(searchedCities.firstChild)
+    }
+
     for (const elm of keys) {
         console.log(elm)
-        
+
         let p = document.createElement("p")
         searchedCities.appendChild(p)
 
@@ -25,13 +31,20 @@ function searchHistory(city) {
         searchedButton.innerText = elm
         p.appendChild(searchedButton)
 
+        searchedButton.addEventListener("click", function () {
+            console.log("item clicked")
+            getCityWeather(elm, units,apiID)
+            fiveDayForcast(elm, units,apiID)
+
+        })
+
     }
 
 
 
 }
 
-function searchButton() {
+function searchButton(city) {
 
     let sButton = document.querySelector("#search-btn")
     sButton.addEventListener("click", function (event) {
@@ -44,6 +57,7 @@ function searchButton() {
 
         // add weather to local storage
         localStorage.setItem(city, city)
+        searchHistory()
 
 
     })
