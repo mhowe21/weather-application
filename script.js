@@ -4,8 +4,12 @@ let apiID = "008c89668171b3ba97713ee1c5229978"
 let TempDataStore = null
 
 window.onload = function () {
+    //console.log(Object(localStorage))
     searchButton()
     searchHistory()
+    getCityWeather(city, units, apiID)
+    fiveDayForcast(city, units, apiID)
+
 }
 
 
@@ -16,10 +20,10 @@ function searchHistory() {
     let searchedCities = document.querySelector(".searched-cities")
 
     // clear items prior to draw
-    while(searchedCities.firstChild){
+    while (searchedCities.firstChild) {
         searchedCities.removeChild(searchedCities.firstChild)
     }
-    
+
 
     for (const elm of keys) {
         console.log(elm)
@@ -34,8 +38,8 @@ function searchHistory() {
 
         searchedButton.addEventListener("click", function () {
             console.log("item clicked")
-            getCityWeather(elm, units,apiID)
-            fiveDayForcast(elm, units,apiID)
+            getCityWeather(elm, units, apiID)
+            fiveDayForcast(elm, units, apiID)
 
         })
 
@@ -100,13 +104,8 @@ function jsonHandler(data) {
 
     let currentCardBody = document.createElement("div")
     currentCardBody.setAttribute("class", "card-body")
-    currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH</p>`)
+    currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}@2x.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH</p>`)
     currentCard.appendChild(currentCardBody)
-
-    // let element = document.createElement("div")
-    // currentWeather.appendChild(element)
-    // element.innerHTML = (`City: ${city},${data.sys.country} <br> Tempreture: ${temp} F <br> WindSpeed: ${data.wind.speed} MPH`)
-
 
 }
 
@@ -143,14 +142,10 @@ function fiveDayJson(data) {
     fiveDayHeader.innerText = "5-Day Forecast:"
     fiveDay.appendChild(fiveDayHeader)
 
-    //let dayDiv = document.createElement("div")
+
 
     for (let i = 0; i < data.list.length; i = i + 8) {
-        //console.log(TempDataStore.list[i].dt_txt)
 
-        // let p = document.createElement("p")
-        // fiveDay.appendChild(p)
-        // p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
         let column = document.createElement("div")
         column.setAttribute("class", "col-md forcast-item-holder")
         fiveDay.append(column)
@@ -162,7 +157,7 @@ function fiveDayJson(data) {
 
         let cardBody = document.createElement("div")
         cardBody.setAttribute("class", "card-body")
-        cardBody.innerHTML = (`<h5 class="card-title">${data.list[i].dt_txt}</h5> <p>Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%</p>`)
+        cardBody.innerHTML = (`<h5 class="card-title">${data.list[i].dt_txt} <span><img src="http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png"></span></h5> <p>Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%</p>`)
         card.appendChild(cardBody)
 
 
