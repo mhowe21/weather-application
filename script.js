@@ -39,9 +39,6 @@ function searchHistory() {
         })
 
     }
-
-
-
 }
 
 function searchButton(city) {
@@ -149,7 +146,7 @@ function fiveDayJson(data) {
         // fiveDay.appendChild(p)
         // p.innerHTML = (`Date ${data.list[i].dt_txt} <br> Min Temp: ${data.list[i].main.temp_min} <br> Max Temp: ${data.list[i].main.temp_max} <br> Humidity: ${data.list[i].main.humidity}%`)
         let column = document.createElement("div")
-        column.setAttribute("class", "col-2 forcast-item-holder")
+        column.setAttribute("class", "col-md forcast-item-holder")
         fiveDay.append(column)
 
         let card = document.createElement("div")
