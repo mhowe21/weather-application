@@ -19,6 +19,7 @@ function searchHistory() {
     while(searchedCities.firstChild){
         searchedCities.removeChild(searchedCities.firstChild)
     }
+    
 
     for (const elm of keys) {
         console.log(elm)
@@ -136,6 +137,10 @@ function fiveDayJson(data) {
     while (fiveDay.firstChild) {
         fiveDay.removeChild(fiveDay.lastChild)
     }
+
+    let fiveDayHeader = document.createElement("h1")
+    fiveDayHeader.innerText = "5-Day Forecast:"
+    fiveDay.appendChild(fiveDayHeader)
 
     //let dayDiv = document.createElement("div")
 
