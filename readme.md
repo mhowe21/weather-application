@@ -3,6 +3,7 @@ In this demonstratino we used fetch to create a simple weather dashboard that pu
 
 ## Usage
 Enter a city into the search box. That should pull up the weather for that city, as well as the five day forcast. 
+![Image of application](https://github.com/mhowe21/weather-application/blob/master/readmeImg.png)
 
 ### Acceptance Creteria
 - GIVEN a weather dashboard with form inputs
