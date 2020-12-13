@@ -215,3 +215,7 @@ function fiveDayJson(data) {
     }
 
 }
+
+function errorModel() {
+    alert("Unable to locate the city")
+}
