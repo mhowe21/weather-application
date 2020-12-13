@@ -94,7 +94,7 @@ function getCityWeather(city, units, apiID) {
             let lon = data.coord.lon
             let lat = data.coord.lat
 
-            fetch(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiID}`)
+            fetch(`https://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiID}`)
                 .then(response => {
                     if (response.ok) {
                         return (response.json())
