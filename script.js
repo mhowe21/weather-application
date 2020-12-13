@@ -12,9 +12,9 @@ window.onload = function () {
     if (localStorage.length > 0) {
         getCityWeather(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
         fiveDayForcast(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
-    }else{
-        getCityWeather(city,units,apiID)
-        fiveDayForcast(city,units,apiID)
+    } else {
+        getCityWeather(city, units, apiID)
+        fiveDayForcast(city, units, apiID)
     }
 
 
@@ -87,26 +87,51 @@ function getCityWeather(city, units, apiID) {
 
         })
         .then(data => {
-            jsonHandler(data)
-            return data
+            //jsonHandler(data)
+            //return data
+            let weatherData = data
+            console.log(data)
+            let lon = data.coord.lon
+            let lat = data.coord.lat
+
+            fetch(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiID}`)
+                .then(response => {
+                    if (response.ok) {
+                        return (response.json())
+                    } else {
+                        throw new error("The call was not completed succesfully")
+                    }
+                }).then(data => {
+                    jsonHandler(weatherData, data)
+                })
+
+
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.log("error", error)
+            
+        });
 
 }
 
-function jsonHandler(data) {
+
+function jsonHandler(data, uvData) {
     console.log(data)
 
     let city = data.name
     let temp = data.main.temp
     let icon = data.weather[0].icon
-    
+
     let currentWeather = document.getElementById("current-weather")
     // clear old results from Dom
     while (currentWeather.firstChild) {
         currentWeather.removeChild(currentWeather.lastChild)
     }
 
+    uvValue = uvData.value
+    console.log(uvValue)
+
+    //draw elements to page
     let currentCard = document.createElement("div")
     currentCard.setAttribute("class", "card weather-card")
     currentWeather.appendChild(currentCard)
@@ -115,6 +140,26 @@ function jsonHandler(data) {
     currentCardBody.setAttribute("class", "card-body")
     currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}@2x.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH <br>Humidity: ${data.main.humidity}%</p>`)
     currentCard.appendChild(currentCardBody)
+
+    let uvIndex = document.createElement("div")
+    uvIndex.setAttribute("class", "card-text")
+    uvIndex.innerHTML = (uvIndex)
+    currentCardBody.appendChild(uvIndex)
+    uvIndex.innerHTML = (`UV Index: ${uvValue}`)
+    // style uv element
+    if (uvValue < 3) {
+        uvIndex.classList.remove("med-uv-index", "high-uv-index")
+        uvIndex.setAttribute("class", "low-uv-index")
+
+    } else if (uvValue > 3 && uvValue < 8) {
+        uvIndex.classList.remove("low-uv-index","high-uv-index")
+        uvIndex.setAttribute("class", "med-uv-index")
+
+    } else if (uvValue > 8) {
+        console.log("uv index is high")
+        uvIndex.classList.remove("low-uv-index","med-uv-index")
+        uvIndex.setAttribute("class", "high-uv-index")
+    }
 
 }
 
