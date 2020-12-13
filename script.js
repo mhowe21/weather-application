@@ -1,7 +1,6 @@
 let city = "Salt Lake City"
 let units = "imperial"
 let apiID = "008c89668171b3ba97713ee1c5229978"
-let TempDataStore = null
 
 window.onload = function () {
     
@@ -176,7 +175,6 @@ function fiveDayForcast(city, units, apiID) {
 }
 
 function fiveDayJson(data) {
-    TempDataStore = data
 
     let fiveDay = document.querySelector("#forcast")
 
