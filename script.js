@@ -107,7 +107,10 @@ function getCityWeather(city, units, apiID) {
 
 
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.log("error", error)
+            
+        });
 
 }
 
@@ -214,8 +217,4 @@ function fiveDayJson(data) {
 
     }
 
-}
-
-function errorModel() {
-    alert("Unable to locate the city")
 }
