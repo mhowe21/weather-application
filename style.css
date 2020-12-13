@@ -23,3 +23,13 @@ header{
     align-items: center;
     border: none;
 }
+
+.low-uv-index {
+    background-color: blue;
+}
+.med-uv-index {
+    background-color: yellow;
+}
+.high-un-index {
+    background-color: red;
+}

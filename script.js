@@ -128,14 +128,31 @@ function jsonHandler(data, uvData) {
     uvValue = uvData.value
     console.log(uvValue)
 
+    //draw elements to page
     let currentCard = document.createElement("div")
     currentCard.setAttribute("class", "card weather-card")
     currentWeather.appendChild(currentCard)
 
     let currentCardBody = document.createElement("div")
     currentCardBody.setAttribute("class", "card-body")
-    currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}@2x.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH <br>Humidity: ${data.main.humidity}% <br>UV Index: ${uvValue}</p>`)
+    currentCardBody.innerHTML = (`<h2>${city} Weather <span><img src="https://openweathermap.org/img/wn/${icon}@2x.png"></span></h2><p class="card-text">Tempreture: ${temp} F <br> WindSpeed ${data.wind.speed} MPH <br>Humidity: ${data.main.humidity}%</p>`)
     currentCard.appendChild(currentCardBody)
+
+    let uvIndex = document.createElement("div")
+    uvIndex.setAttribute("class", "card-text")
+    uvIndex.innerHTML = (uvIndex)
+    currentCardBody.appendChild(uvIndex)
+    uvIndex.innerHTML = (`UV Index: ${uvValue}`)
+    // style uv element
+    if(uvValue < 3) { 
+         uvIndex.setAttribute("class","low-uv-index")
+    }
+    else if(unVale > 3 && unVale < 8) {
+        uvIndex.setAttribute("class", "med-uv-index")
+    }
+    else if(unValue > 8) {
+        uvIndex.setAttribute("class", "high-uv-index")
+    }
 
 }
 
