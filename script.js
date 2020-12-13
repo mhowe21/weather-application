@@ -34,7 +34,6 @@ function searchHistory() {
 
 
     for (const elm of keys) {
-        console.log(elm)
 
         let p = document.createElement("p")
         searchedCities.appendChild(p)
@@ -45,7 +44,6 @@ function searchHistory() {
         p.appendChild(searchedButton)
 
         searchedButton.addEventListener("click", function () {
-            console.log("item clicked")
             getCityWeather(elm, units, apiID)
             fiveDayForcast(elm, units, apiID)
 
@@ -59,7 +57,6 @@ function searchButton(city) {
     let sButton = document.querySelector("#search-btn")
     sButton.addEventListener("click", function (event) {
         event.preventDefault()
-        console.log("search button pressed")
 
         city = document.querySelector("#search-box").value
         getCityWeather(city, units, apiID)
@@ -90,7 +87,7 @@ function getCityWeather(city, units, apiID) {
             //jsonHandler(data)
             //return data
             let weatherData = data
-            console.log(data)
+
             let lon = data.coord.lon
             let lat = data.coord.lat
 
@@ -116,7 +113,6 @@ function getCityWeather(city, units, apiID) {
 
 
 function jsonHandler(data, uvData) {
-    console.log(data)
 
     let city = data.name
     let temp = data.main.temp
@@ -129,8 +125,6 @@ function jsonHandler(data, uvData) {
     }
 
     uvValue = uvData.value
-    console.log(uvValue)
-
     //draw elements to page
     let currentCard = document.createElement("div")
     currentCard.setAttribute("class", "card weather-card")
@@ -156,7 +150,6 @@ function jsonHandler(data, uvData) {
         uvIndex.setAttribute("class", "med-uv-index")
 
     } else if (uvValue > 8) {
-        console.log("uv index is high")
         uvIndex.classList.remove("low-uv-index","med-uv-index")
         uvIndex.setAttribute("class", "high-uv-index")
     }
