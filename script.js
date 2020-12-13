@@ -12,9 +12,9 @@ window.onload = function () {
     if (localStorage.length > 0) {
         getCityWeather(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
         fiveDayForcast(String(Object(localStorage[Object.keys(localStorage)[0]])), units, apiID)
-    }else{
-        getCityWeather(city,units,apiID)
-        fiveDayForcast(city,units,apiID)
+    } else {
+        getCityWeather(city, units, apiID)
+        fiveDayForcast(city, units, apiID)
     }
 
 
@@ -95,15 +95,15 @@ function getCityWeather(city, units, apiID) {
             let lat = data.coord.lat
 
             fetch(`http://api.openweathermap.org/data/2.5/uvi?lat=${lat}&lon=${lon}&appid=${apiID}`)
-            .then(response => {
-                if(response.ok) {
-                    return(response.json())
-                } else {
-                    throw new error("The call was not completed succesfully")
-                }
-            }).then(data => {
-                jsonHandler(weatherData,data)
-            })
+                .then(response => {
+                    if (response.ok) {
+                        return (response.json())
+                    } else {
+                        throw new error("The call was not completed succesfully")
+                    }
+                }).then(data => {
+                    jsonHandler(weatherData, data)
+                })
 
 
         })
@@ -118,7 +118,7 @@ function jsonHandler(data, uvData) {
     let city = data.name
     let temp = data.main.temp
     let icon = data.weather[0].icon
-    
+
     let currentWeather = document.getElementById("current-weather")
     // clear old results from Dom
     while (currentWeather.firstChild) {
@@ -144,13 +144,17 @@ function jsonHandler(data, uvData) {
     currentCardBody.appendChild(uvIndex)
     uvIndex.innerHTML = (`UV Index: ${uvValue}`)
     // style uv element
-    if(uvValue < 3) { 
-         uvIndex.setAttribute("class","low-uv-index")
-    }
-    else if(unVale > 3 && unVale < 8) {
+    if (uvValue < 3) {
+        uvIndex.classList.remove("med-uv-index", "high-uv-index")
+        uvIndex.setAttribute("class", "low-uv-index")
+
+    } else if (uvValue > 3 && uvValue < 8) {
+        uvIndex.classList.remove("low-uv-index","high-uv-index")
         uvIndex.setAttribute("class", "med-uv-index")
-    }
-    else if(unValue > 8) {
+
+    } else if (uvValue > 8) {
+        console.log("uv index is high")
+        uvIndex.classList.remove("low-uv-index","med-uv-index")
         uvIndex.setAttribute("class", "high-uv-index")
     }
 
@@ -211,4 +215,3 @@ function fiveDayJson(data) {
     }
 
 }
-

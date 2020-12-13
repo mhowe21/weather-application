@@ -7,6 +7,7 @@ header{
     width: 100%;
     height: 100%;
     color: white;
+    border-radius: 5px;
 }
 
 .searched-cities {
@@ -26,10 +27,17 @@ header{
 
 .low-uv-index {
     background-color: blue;
+    color: white;
+    border-radius: 5px;
 }
 .med-uv-index {
     background-color: yellow;
+    color: white;
+    border-radius: 5px;
 }
-.high-un-index {
+.high-uv-index {
     background-color: red;
+    color: white;
+    border-radius: 5px;
 }
+
