@@ -4,7 +4,7 @@ let apiID = "008c89668171b3ba97713ee1c5229978"
 let TempDataStore = null
 
 window.onload = function () {
-    //console.log(Object(localStorage))
+    
     searchButton()
     searchHistory()
 
